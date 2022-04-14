@@ -5,12 +5,13 @@ for (let i = 0; i < font.length; i++) {
    font[i].addEventListener('click', (e) => {
       e.preventDefault();
       for (let i = 0; i < font.length; i++) {
-         if (font[i].classList.contains('font-size__active')) {
-            font[i].classList.toggle('font-size__active');
+         if (font[i].classList.contains('font-size_active')) {
+            font[i].classList.toggle('font-size_active');
          }
       }
 
       font[i].classList.toggle('font-size__active');
+      font[i].classList.toggle('font-size_active');
       if (font[i].classList.contains('font-size_small')) {
          book.className = "book book_fs-small";
       } else if (font[i].classList.contains('font-size_big')) {
@@ -18,5 +19,7 @@ for (let i = 0; i < font.length; i++) {
       } else {
          book.className = "book";
       }
+
+
    });
 }
