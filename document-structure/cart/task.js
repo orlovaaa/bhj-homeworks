@@ -22,15 +22,11 @@ for (let i = 0; i < productDec.length; i++) {
     const productCart = Array.from(document.querySelectorAll('.cart__product'));
 
     if (productCart.find((x) => x.dataset.id === product[i].dataset.id)) {
-      for (let j = 0; j < productCart.length; j++) {
-        if (productCart[j].dataset.id === product[i].dataset.id) {
-          const count = productCart[j].querySelector('.cart__product-count');
-          const newCount = count;
+      const count = productCart[i].querySelector('.cart__product-count');
+      const newCount = count;
 
-          newCount.textContent = Number(count.textContent) + Number(productValue[i].textContent);
-          productCart[j].replaceChild(newCount, count);
-        }
-      }
+      newCount.textContent = Number(count.textContent) + Number(productValue[i].textContent);
+      productCart[i].replaceChild(newCount, count);  
     } else {
       productsCart.innerHTML += `<div class="cart__product" data-id='${product[i].dataset.id}'>
       <img class="cart__product-image" src=${productImage[i].src} />
