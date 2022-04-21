@@ -1,23 +1,27 @@
-const tooltip = Array.from(document.querySelectorAll('.has-tooltip'));
+const hasTooltip = Array.from(document.querySelectorAll('.has-tooltip'));
 
-const div = document.createElement('div');
-div.className = 'tooltip';
-tooltip[0].appendChild(div);
+for (let i = 0; i < hasTooltip.length; i++) {
+   hasTooltip[i].addEventListener('click', show);
+}
 
-for (let i = 0; i < tooltip.length; i++) {
-   tooltip[i].addEventListener('click', (e) => {
-      e.preventDefault();
+function show(e) {
+   e.preventDefault();
 
-      const left = tooltip[i].getBoundingClientRect().left;
-      const top = tooltip[i].getBoundingClientRect().bottom;
+   const next = this.nextElementSibling;
+   
+   if (Boolean(next) && next.classList.contains('tooltip')) {
+      next.classList.toggle('tooltip_active');
+   } else {
+      const div = document.createElement('div');
+      div.classList.add('tooltip', 'tooltip_active');
+      div.innerText = this.title;
 
-      if (div.textContent === tooltip[i].getAttribute('title')) {
-         div.className = 'tooltip';
-      } else {
-         div.className = " tooltip tooltip_active";
-      }
-      div.textContent = `${tooltip[i].getAttribute('title')}`;
+      const left = this.getBoundingClientRect().left;
+      const top = this.getBoundingClientRect().bottom;
+
       div.style.left = left + "px";
       div.style.top = top + "px";
-   });
+
+      this.insertAdjacentElement('afterEnd', div);
+   }
 }
